@@ -32,7 +32,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="flex flex-col h-svh">
+      <body className="flex flex-col h-svh text-whitePrimary">
         <Header />
         <main className="flex-grow">{children}</main>
 
