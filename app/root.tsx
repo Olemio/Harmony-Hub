@@ -1,9 +1,11 @@
 import {
+  Link,
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLocation,
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
 
@@ -23,6 +25,10 @@ export const links: LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const location = useLocation();
+
+  const isIndex = location.pathname === "/";
+
   return (
     <html lang="en">
       <head>
@@ -32,6 +38,18 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
+        <header className="py-8 px-16 text-greenPrimary">
+          <div className="flex justify-between items-center">
+            <h1 className="text-5xl">Harmony Hub</h1>
+            <h2 className="text-3xl hover:underline">
+              {isIndex ? (
+                <Link to="/dashboard">Go to Dashboard</Link>
+              ) : (
+                <Link to="/">Go home</Link>
+              )}
+            </h2>
+          </div>
+        </header>
         {children}
         <ScrollRestoration />
         <Scripts />
