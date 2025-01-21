@@ -46,10 +46,9 @@ export default function Dashboard() {
 
   const [selectedList, setSelectedList] = React.useState<SongData | null>(null);
 
-  function handleSelectList(name: string) {
-    setSelectedList(null);
-    const list = formattedData.find((item) => item.name === name);
-    setSelectedList(list || null);
+  function handleSelectList(id: string) {
+    const list = formattedData.find((item) => item.id === id);
+    if (list) setSelectedList(list);
   }
 
   return (
@@ -59,7 +58,7 @@ export default function Dashboard() {
         {selectedList ? (
           <ul className="flex flex-col items-center justify-start gap-4 p-4 overflow-y-auto max-h-96 scrollbar-thin scrollbar-thumb-greenSecondary scrollbar-track-grayPrimary">
             {selectedList.songList.map((song, index) => (
-              <div key={selectedList.id} className="flex items-center gap-2 ">
+              <div key={song.song + index} className="flex items-center gap-2 ">
                 {index + 1}.
                 <li className="flex items-center justify-center bg-greenSecondary rounded h-10 px-4 text-grayPrimary">
                   {song.song} by {song.artist}
@@ -80,9 +79,9 @@ export default function Dashboard() {
           {formattedData.map((item) => (
             <li key={item.id}>
               <button
-                onClick={() => handleSelectList(item.name)}
+                onClick={() => handleSelectList(item.id)}
                 className={`${
-                  item.name === selectedList?.name
+                  item.id === selectedList?.id
                     ? "bg-greenSecondary"
                     : "bg-greenPrimary"
                 } text-grayPrimary rounded-full px-8 py-1 text-xl`}
