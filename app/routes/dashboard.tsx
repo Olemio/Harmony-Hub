@@ -65,7 +65,7 @@ export default function Dashboard() {
 
       <div className="flex flex-col items-center justify-center gap-4">
         <h1 className="text-2xl">Saved lists</h1>
-        <ul className="flex flex-col items-center justify-center gap-4 overflow-y-auto max-h-96">
+        <ul className="flex flex-col items-center justify-center gap-4 overflow-y-auto max-h-96 scrollbar-thin scrollbar-thumb-greenSecondary scrollbar-track-grayPrimary">
           {mockData.map((item, index) => (
             <li key={index}>
               <button
