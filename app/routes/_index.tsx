@@ -4,6 +4,7 @@ import {
   useActionData,
   useFetcher,
 } from "@remix-run/react";
+import FormInput from "../components/forminput";
 
 export const meta: MetaFunction = () => {
   return [
@@ -60,7 +61,7 @@ export default function Home() {
   return (
     <div className=" flex flex-col items-center justify-center h-full gap-16">
       {state === "submitting" ? (
-        <LoadingState />
+        <h1 className="text-3xl">Searching...</h1>
       ) : actionData && !actionData.error ? (
         <Results data={actionData} />
       ) : (
@@ -68,31 +69,6 @@ export default function Home() {
       )}
     </div>
   );
-}
-
-function Results({ data }: { data: any }) {
-  return (
-    <div className="flex flex-col items-center gap-8">
-      <h1 className="text-3xl">Recommendations</h1>
-      <ul className="text-xl text-grayPrimary">
-        {data.recommendations.map((rec: any, index: number) => (
-          <li key={index} className="mb-2">
-            {rec.artist} - {rec.song}
-          </li>
-        ))}
-      </ul>
-      <button
-        onClick={() => window.location.reload()}
-        className="bg-greenPrimary text-grayPrimary rounded-full m-2 px-16 py-2 text-2xl font-bold"
-      >
-        Search Again
-      </button>
-    </div>
-  );
-}
-
-function LoadingState() {
-  return <h1 className="text-3xl">Searching...</h1>;
 }
 
 function SearchForm({ fetcher }: { fetcher: FetcherWithComponents<any> }) {
@@ -123,27 +99,23 @@ function SearchForm({ fetcher }: { fetcher: FetcherWithComponents<any> }) {
   );
 }
 
-function FormInput({
-  name,
-  label,
-  defaultValue,
-  type = "text",
-}: {
-  name: "songAmount" | "genre" | "tempo" | "theme";
-  label: string;
-  defaultValue: string | number;
-  type?: string;
-}) {
+function Results({ data }: { data: any }) {
   return (
-    <div className="flex flex-col items-center gap-2">
-      <label htmlFor={name}>{label}:</label>
-      <input
-        name={name}
-        id={name}
-        defaultValue={defaultValue}
-        type={type}
-        className="bg-greenSecondary rounded h-12 p-2 text-center text-grayPrimary"
-      />
+    <div className="flex flex-col items-center gap-8">
+      <h1 className="text-3xl">Recommendations</h1>
+      <ul className="text-xl text-grayPrimary">
+        {data.recommendations.map((rec: any, index: number) => (
+          <li key={index} className="mb-2">
+            {rec.artist} - {rec.song}
+          </li>
+        ))}
+      </ul>
+      <button
+        onClick={() => window.location.reload()}
+        className="bg-greenPrimary text-grayPrimary rounded-full m-2 px-16 py-2 text-2xl font-bold"
+      >
+        Search Again
+      </button>
     </div>
   );
 }
