@@ -2,22 +2,30 @@ export default function FormInput({
   name,
   label,
   defaultValue,
+  srOnlyLabel,
+  disabled,
   type = "text",
 }: {
-  name: "songAmount" | "genre" | "tempo" | "theme";
+  name: "songAmount" | "genre" | "tempo" | "theme" | "name" | "songList";
   label: string;
   defaultValue: string | number;
+  srOnlyLabel?: boolean;
+  disabled?: boolean;
   type?: string;
+  className?: string;
 }) {
   return (
     <div className="flex flex-col items-center gap-2">
-      <label htmlFor={name}>{label}:</label>
+      <label htmlFor={name} className={srOnlyLabel ? "sr-only" : ""}>
+        {label}:
+      </label>
       <input
         name={name}
         id={name}
         defaultValue={defaultValue}
         type={type}
-        className="bg-greenSecondary rounded h-12 p-2 text-center text-grayPrimary"
+        disabled={disabled}
+        className="bg-greenSecondary rounded h-10 p-2 text-center text-grayPrimary"
       />
     </div>
   );

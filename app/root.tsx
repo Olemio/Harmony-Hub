@@ -34,7 +34,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body className="flex flex-col h-svh text-whitePrimary">
         <Header />
-        <main className="flex-grow">{children}</main>
+        <main className="flex-grow">
+          <div className="flex flex-col items-center justify-center h-full gap-16">
+            {children}
+          </div>
+        </main>
 
         <ScrollRestoration />
         <Scripts />
