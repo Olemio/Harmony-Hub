@@ -70,7 +70,11 @@ export default function Dashboard() {
             <li key={index}>
               <button
                 onClick={() => handleSelectList(item.name)}
-                className="bg-greenPrimary text-grayPrimary rounded-full px-8 py-1 text-xl"
+                className={`${
+                  item.name === selectedList?.name
+                    ? "bg-greenSecondary"
+                    : "bg-greenPrimary"
+                } text-grayPrimary rounded-full px-8 py-1 text-xl`}
               >
                 {item.name}
               </button>
