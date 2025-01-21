@@ -36,11 +36,17 @@ export default function Dashboard() {
 
   console.log(loaderData);
 
-  const formattedData = loaderData.map((item) => ({
-    id: item.id,
-    name: item.name,
-    songList: JSON.parse(item.songList),
-  }));
+  const formattedData = loaderData
+    .map((item) => ({
+      id: item.id,
+      name: item.name,
+      songList: JSON.parse(item.songList),
+      createdAt: item.createdAt,
+    }))
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
 
   console.log(formattedData);
 
@@ -60,7 +66,7 @@ export default function Dashboard() {
             {selectedList.songList.map((song, index) => (
               <div key={song.song + index} className="flex items-center gap-2 ">
                 {index + 1}.
-                <li className="flex items-center justify-center bg-greenSecondary rounded h-10 px-4 text-grayPrimary">
+                <li className="flex items-center justify-center bg-greenSecondary rounded px-4 py-2 text-grayPrimary">
                   {song.song} by {song.artist}
                 </li>
               </div>
