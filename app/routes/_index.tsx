@@ -1,9 +1,5 @@
 import type { ActionFunction, MetaFunction } from "@remix-run/node";
-import {
-  FetcherWithComponents,
-  useActionData,
-  useFetcher,
-} from "@remix-run/react";
+import { FetcherWithComponents, useFetcher } from "@remix-run/react";
 import FormInput from "../components/forminput";
 
 export const meta: MetaFunction = () => {
@@ -43,6 +39,7 @@ export const action: ActionFunction = async ({ request }) => {
     }
 
     const data = await response.json();
+
     console.log(data);
 
     return data;
@@ -52,18 +49,25 @@ export const action: ActionFunction = async ({ request }) => {
   }
 };
 
+type SongData = {
+  recommendations: {
+    artist: string;
+    song: string;
+  }[];
+};
+
 export default function Home() {
-  const fetcher = useFetcher();
+  const fetcher = useFetcher<SongData>();
   const state = fetcher.state;
-  const actionData = useActionData();
+  const actionData = fetcher.data;
   console.log(actionData);
 
   return (
     <div className=" flex flex-col items-center justify-center h-full gap-16">
       {state === "submitting" ? (
         <h1 className="text-3xl">Searching...</h1>
-      ) : actionData && !actionData.error ? (
-        <Results data={actionData} />
+      ) : actionData ? (
+        <Results data={actionData as SongData} />
       ) : (
         <SearchForm fetcher={fetcher} />
       )}
@@ -71,7 +75,7 @@ export default function Home() {
   );
 }
 
-function SearchForm({ fetcher }: { fetcher: FetcherWithComponents<any> }) {
+function SearchForm({ fetcher }: { fetcher: FetcherWithComponents<SongData> }) {
   return (
     <>
       <h1 className="text-3xl">Fill out form and search!</h1>
@@ -99,23 +103,34 @@ function SearchForm({ fetcher }: { fetcher: FetcherWithComponents<any> }) {
   );
 }
 
-function Results({ data }: { data: any }) {
+function Results({ data }: { data: SongData }) {
   return (
     <div className="flex flex-col items-center gap-8">
-      <h1 className="text-3xl">Recommendations</h1>
-      <ul className="text-xl text-grayPrimary">
-        {data.recommendations.map((rec: any, index: number) => (
-          <li key={index} className="mb-2">
-            {rec.artist} - {rec.song}
+      <h1 className="text-3xl">Results!</h1>
+      <ul className="flex flex-col gap-4 text-xl ">
+        {data.recommendations.map((rec, i) => (
+          <li key={rec.song} className="flex items-center justify-center gap-4">
+            {i + 1}.{" "}
+            <div className="flex items-center justify-center bg-greenSecondary rounded h-10 px-8 text-grayPrimary">
+              {rec.artist} by {rec.song}
+            </div>
           </li>
         ))}
       </ul>
-      <button
-        onClick={() => window.location.reload()}
-        className="bg-greenPrimary text-grayPrimary rounded-full m-2 px-16 py-2 text-2xl font-bold"
-      >
-        Search Again
-      </button>
+      <div>
+        <button
+          onClick={() => window.location.reload()}
+          className="bg-greenPrimary text-grayPrimary rounded-full m-2 px-16 py-2 text-2xl font-bold"
+        >
+          Search Again
+        </button>
+        <button
+          onClick={() => console.log("Save button")}
+          className="bg-greenPrimary text-grayPrimary rounded-full m-2 px-16 py-2 text-2xl font-bold"
+        >
+          save
+        </button>
+      </div>
     </div>
   );
 }

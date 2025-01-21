@@ -1,3 +1,3 @@
 export default function Dashboard() {
-  return <div>Welcome to the dashbaord</div>;
+  return <div>Load stuff from database</div>;
 }
