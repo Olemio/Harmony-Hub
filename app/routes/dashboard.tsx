@@ -1,5 +1,5 @@
 import type { LoaderFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+// import { useLoaderData } from "@remix-run/react";
 import { mockData } from "../../mock";
 import { Item, SongData } from "../../types";
 import React from "react";
@@ -33,7 +33,7 @@ export const loader: LoaderFunction = async () => {
   }
 };
 export default function Dashboard() {
-  const loaderData = useLoaderData<Item[]>();
+  // const loaderData = useLoaderData<Item[]>();
   const [selectedList, setSelectedList] = React.useState<SongData | null>(null);
 
   function handleSelectList(name: string) {
