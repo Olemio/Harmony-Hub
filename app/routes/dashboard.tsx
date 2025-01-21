@@ -1,4 +1,4 @@
-import type { LoaderFunction } from "@remix-run/node";
+import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { Item, SongData } from "../../types";
 import React from "react";
@@ -31,6 +31,10 @@ export const loader: LoaderFunction = async () => {
   }
 };
 
+export const action: ActionFunction = async () => {
+  console.log("hello form aciton");
+};
+
 export default function Dashboard() {
   const loaderData = useLoaderData<SongData[]>();
 
@@ -58,20 +62,26 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="flex gap-8 w-full justify-around px-16 items-start">
+    <div className="grid grid-cols-2 w-full items-start px-16">
       <div className="flex flex-col items-center justify-center gap-4">
-        <h1 className="text-2xl">Songs</h1>
+        <h1 className="text-2xl">Song list</h1>
         {selectedList ? (
-          <ul className="flex flex-col items-center justify-start gap-4 p-4 overflow-y-auto max-h-96 scrollbar-thin scrollbar-thumb-greenSecondary scrollbar-track-grayPrimary">
-            {selectedList.songList.map((song, index) => (
-              <div key={song.song + index} className="flex items-center gap-2 ">
-                {index + 1}.
-                <li className="flex items-center justify-center bg-greenSecondary rounded px-4 py-2 text-grayPrimary">
-                  {song.song} by {song.artist}
-                </li>
-              </div>
-            ))}
-          </ul>
+          <>
+            <p>List name: {selectedList.name}</p>
+            <ul className="flex flex-col items-center justify-start gap-4 p-4 overflow-y-auto max-h-96 scrollbar-thin scrollbar-thumb-greenSecondary scrollbar-track-grayPrimary">
+              {selectedList.songList.map((song, index) => (
+                <div
+                  key={song.song + index}
+                  className="flex items-center gap-2 "
+                >
+                  {index + 1}.
+                  <li className="flex items-center justify-center bg-greenSecondary rounded px-4 py-2 text-grayPrimary">
+                    {song.song} by {song.artist}
+                  </li>
+                </div>
+              ))}
+            </ul>
+          </>
         ) : (
           <p className="text-gray-500">
             No list selected. Please select a list.

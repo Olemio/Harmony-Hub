@@ -28,7 +28,7 @@ export const action: ActionFunction = async ({ request }) => {
       throw new Error(`Failed to fetch data: ${response.statusText}`);
     }
 
-    const name = `${genre} - ${tempo} - ${theme} - ${num_songs}`;
+    const name = `${genre}, ${tempo}, ${theme}, ${num_songs}`;
     const data = await response.json();
 
     return { name, ...data };
