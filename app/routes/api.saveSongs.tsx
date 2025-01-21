@@ -12,8 +12,6 @@ export const action: ActionFunction = async ({ request }) => {
     return new Response("Invalid data", { status: 400 });
   }
 
-  console.log({ id, name, songList, userId, createdAt });
-
   try {
     const formattedData = {
       id,
@@ -22,8 +20,6 @@ export const action: ActionFunction = async ({ request }) => {
       userId,
       createdAt,
     };
-
-    console.log("Formatted Data:", JSON.stringify(formattedData));
 
     const response = await fetch(
       "https://eau8opmlk7.execute-api.eu-central-1.amazonaws.com/items",
@@ -42,7 +38,6 @@ export const action: ActionFunction = async ({ request }) => {
       return new Response("Failed to save data", { status: 500 });
     }
 
-    console.log("Successfully saved data!");
     return new Response("Data saved successfully", { status: 200 });
   } catch (error) {
     console.error("Error:", error);

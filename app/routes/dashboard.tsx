@@ -1,5 +1,5 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { useFetcher, useLoaderData } from "@remix-run/react";
 import { Item, SongData } from "../../types";
 import React from "react";
 
@@ -31,14 +31,9 @@ export const loader: LoaderFunction = async () => {
   }
 };
 
-export const action: ActionFunction = async () => {
-  console.log("hello form aciton");
-};
-
 export default function Dashboard() {
   const loaderData = useLoaderData<SongData[]>();
-
-  console.log(loaderData);
+  const fetcher = useFetcher();
 
   const formattedData = loaderData
     .map((item) => ({
@@ -51,8 +46,6 @@ export default function Dashboard() {
       (a, b) =>
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     );
-
-  console.log(formattedData);
 
   const [selectedList, setSelectedList] = React.useState<SongData | null>(null);
 
@@ -95,6 +88,7 @@ export default function Dashboard() {
           {formattedData.map((item) => (
             <li key={item.id}>
               <button
+                type="button"
                 onClick={() => handleSelectList(item.id)}
                 className={`${
                   item.id === selectedList?.id
@@ -104,6 +98,10 @@ export default function Dashboard() {
               >
                 {item.name}
               </button>
+              <fetcher.Form method="DELETE" action="/api/deleteSong">
+                <input type="hidden" name="id" value={item.id} />
+                <button type="submit">Delete</button>
+              </fetcher.Form>
             </li>
           ))}
         </ul>
