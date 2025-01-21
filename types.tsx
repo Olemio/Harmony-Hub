@@ -5,8 +5,9 @@ export type Item = {
 }[];
 
 export type SongData = {
+  id: string;
   name: string;
-  recommendations: {
+  songList: {
     artist: string;
     song: string;
   }[];

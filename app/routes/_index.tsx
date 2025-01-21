@@ -2,6 +2,7 @@ import type { MetaFunction } from "@remix-run/node";
 import { FetcherWithComponents, useFetcher } from "@remix-run/react";
 import FormInput from "../components/forminput";
 import { SongData } from "../../types";
+import { v4 as uuidv4 } from "uuid";
 
 export const meta: MetaFunction = () => {
   return [
@@ -87,6 +88,7 @@ function Results({
           type="hidden"
           defaultValue={JSON.stringify(data.recommendations)}
         />
+        <input type="hidden" name="id" defaultValue={uuidv4()} />
 
         <div className="flex flex-col gap-4">
           {data.recommendations.map((rec, i) => (
