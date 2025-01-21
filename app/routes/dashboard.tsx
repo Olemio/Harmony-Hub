@@ -46,7 +46,7 @@ export default function Dashboard() {
       <div className="flex flex-col items-center justify-center gap-4">
         <h1 className="text-2xl">Songs</h1>
         {selectedList ? (
-          <ul className="flex flex-col items-center justify-center gap-4">
+          <ul className="flex flex-col items-center justify-start gap-4 p-4 overflow-y-auto max-h-96 scrollbar-thin scrollbar-thumb-greenSecondary scrollbar-track-grayPrimary">
             {selectedList.recommendations.map((song, index) => (
               <div key={index} className="flex items-center gap-2 ">
                 {index + 1}.
