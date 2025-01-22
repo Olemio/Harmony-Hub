@@ -1,4 +1,5 @@
 import { FormInputPorps } from "types";
+import clsx from "clsx";
 
 export default function FormInput({
   name,
@@ -6,6 +7,7 @@ export default function FormInput({
   defaultValue = "",
   disabled = false,
   type = "text",
+  className,
 }: FormInputPorps) {
   return (
     <div className="flex flex-col items-center gap-2">
@@ -16,7 +18,10 @@ export default function FormInput({
         defaultValue={defaultValue}
         type={type}
         disabled={disabled}
-        className="rounded py-1 w-48 text-center bg-customBabyBlue text-customGrayText"
+        className={clsx(
+          "rounded py-1 w-48 text-center bg-customBabyBlue text-customGrayText",
+          className
+        )}
       />
     </div>
   );
