@@ -3,6 +3,7 @@ import { FetcherWithComponents, useFetcher } from "@remix-run/react";
 import FormInput from "../components/forminput";
 import { SongData } from "../../types";
 import { v4 as uuidv4 } from "uuid";
+import { useAuth } from "react-oidc-context";
 
 export const meta: MetaFunction = () => {
   return [
@@ -15,9 +16,22 @@ export default function Home() {
   const fetcher = useFetcher<SongData>();
   const state = fetcher.state;
   const actionData = fetcher.data;
+  const auth = useAuth();
+
+  const signOutRedirect = () => {
+    const clientId = "3frc1dvnve7u0cmrq8loluaraa";
+    const logoutUri = "http://localhost:5173";
+    const cognitoDomain =
+      "https://eu-central-1iohjpqlho.auth.eu-central-1.amazoncognito.com";
+    window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${logoutUri}`;
+  };
+
+  console.log(auth.isAuthenticated);
 
   return (
     <>
+      <button onClick={() => auth.signinRedirect()}>Sign in</button>
+      <button onClick={() => signOutRedirect()}>Sign out</button>
       {state === "submitting" ? (
         <h1 className="text-3xl">Searching...</h1>
       ) : actionData ? (
