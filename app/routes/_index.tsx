@@ -33,28 +33,28 @@ export default function Home() {
 function SearchForm({ fetcher }: { fetcher: FetcherWithComponents<SongData> }) {
   return (
     <>
-      <h1 className="text-3xl">Personalize your search</h1>
-
       <fetcher.Form
         method="POST"
         action="/api/getSongs"
-        className="grid grid-cols-2 gap-10 text-xl"
+        className="flex flex-col items-center gap-20 text-xl"
       >
-        <FormInput name="genre" label="Genre" defaultValue="Pop" />
-        <FormInput name="tempo" label="Tempo" defaultValue="Upbeat" />
-        <FormInput name="theme" label="Theme" defaultValue="Happy" />
-        <FormInput
-          name="songAmount"
-          label="Amount"
-          defaultValue="5"
-          type="number"
-        />
+        <h1 className="text-3xl">Personalize your search</h1>
 
-        <div className="col-span-2 flex justify-center">
-          <Button type="submit" className="text-2xl px-10">
-            Search
-          </Button>
+        <div className="grid grid-cols-2 gap-10">
+          <FormInput name="genre" label="Genre" defaultValue="Pop" />
+          <FormInput name="tempo" label="Tempo" defaultValue="Upbeat" />
+          <FormInput name="theme" label="Theme" defaultValue="Happy" />
+          <FormInput
+            name="songAmount"
+            label="Amount"
+            defaultValue="5"
+            type="number"
+          />
         </div>
+
+        <Button type="submit" className="text-2xl px-14">
+          Search
+        </Button>
       </fetcher.Form>
     </>
   );
