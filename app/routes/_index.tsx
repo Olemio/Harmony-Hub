@@ -3,6 +3,7 @@ import { FetcherWithComponents, useFetcher } from "@remix-run/react";
 import FormInput from "../components/forminput";
 import { SongData } from "../../types";
 import { v4 as uuidv4 } from "uuid";
+import Button from "~/components/button";
 
 export const meta: MetaFunction = () => {
   return [
@@ -32,30 +33,27 @@ export default function Home() {
 function SearchForm({ fetcher }: { fetcher: FetcherWithComponents<SongData> }) {
   return (
     <>
-      <h1 className="text-3xl">Fill out form and search!</h1>
+      <h1 className="text-3xl">Personalize your search</h1>
 
       <fetcher.Form
         method="POST"
         action="/api/getSongs"
         className="grid grid-cols-2 gap-10 text-xl"
       >
-        <FormInput name="genre" label="Genre" defaultValue="pop" />
-        <FormInput name="tempo" label="Tempo" defaultValue="upbeat" />
-        <FormInput name="theme" label="Theme" defaultValue="happy" />
+        <FormInput name="genre" label="Genre" defaultValue="Pop" />
+        <FormInput name="tempo" label="Tempo" defaultValue="Upbeat" />
+        <FormInput name="theme" label="Theme" defaultValue="Happy" />
         <FormInput
           name="songAmount"
-          label="Amount of songs"
-          defaultValue="2"
+          label="Amount"
+          defaultValue="5"
           type="number"
         />
 
         <div className="col-span-2 flex justify-center">
-          <button
-            type="submit"
-            className="bg-customPnk text-customDarkGray rounded-full m-2 px-16 py-2 text-2xl font-bold"
-          >
+          <Button type="submit" className="text-2xl px-10">
             Search
-          </button>
+          </Button>
         </div>
       </fetcher.Form>
     </>

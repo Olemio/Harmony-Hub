@@ -1,11 +1,5 @@
 import clsx from "clsx";
-
-type ButtonProps = {
-  children: React.ReactNode;
-  type?: "button" | "submit";
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  className?: string;
-};
+import { ButtonProps } from "types";
 
 export default function Button({
   children,
@@ -18,7 +12,7 @@ export default function Button({
       type={type}
       onClick={onClick}
       className={clsx(
-        "bg-customPink text-customDarkGray px-8 py-2 rounded-full text-xl",
+        "bg-customPink text-customDarkGray px-8 py-2 rounded-full",
         className
       )}
     >

@@ -5,31 +5,23 @@ import Button from "./button";
 export default function Header() {
   const { pathname } = useLocation();
   const auth = useAuth();
+  const isSignedIn = auth.isAuthenticated;
 
-  console.log(auth.isAuthenticated);
+  console.log(isSignedIn);
 
   return (
     <header className="flex justify-between items-center py-8  px-16 text-customPink bg-customDarkGray">
       <h1 className="text-3xl">Harmony Hub</h1>
       <div className="flex gap-8">
-        {!auth.isAuthenticated ? (
-          <Button
-            className="text-customPink bg-transparent px-0 py-0"
-            onClick={() => auth.signinRedirect()}
-          >
-            <span className="text-2xl">Sign in</span>
-          </Button>
-        ) : (
-          <Button
-            className="text-customPink bg-transparent px-0 py-0"
-            onClick={() => signOutRedirect()}
-          >
-            <span className="text-2xl">Sign out</span>
-          </Button>
-        )}
+        <Button
+          className="text-customPink bg-transparent px-0 py-0 text-2xl"
+          onClick={() => (isSignedIn ? signOutRedirect : auth.signinRedirect())}
+        >
+          {!isSignedIn ? "Sign in" : "Sign out"}
+        </Button>
 
         <Link
-          className="bg-customPink text-customDarkGray px-8 py-2 rounded-full text-xl"
+          className="bg-customPink text-customDarkGray px-8 py-1 rounded-full"
           to={pathname !== "/" ? "/" : "/dashboard"}
         >
           {pathname === "/" ? "Saved lists" : "Go back"}

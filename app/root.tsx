@@ -43,7 +43,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="flex flex-col h-svh text-customWhite bg-customGray">
+      <body className="flex flex-col h-svh text-customWhite bg-customGray text-xl">
         <AuthProvider {...cognitoAuthConfig}>
           <Header />
           <main className="flex-grow">
