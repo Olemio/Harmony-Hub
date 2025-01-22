@@ -61,14 +61,14 @@ export default function Dashboard() {
         {selectedList ? (
           <>
             <p>List name: {selectedList.name}</p>
-            <ul className="flex flex-col items-center justify-start gap-4 p-4 overflow-y-auto max-h-96 scrollbar-thin scrollbar-thumb-greenSecondary scrollbar-track-grayPrimary">
+            <ul className="flex flex-col items-center justify-start gap-4 p-4 overflow-y-auto max-h-96 scrollbar-thin scrollbar-thumb-white scrollbar-track-white">
               {selectedList.songList.map((song, index) => (
                 <div
                   key={song.song + index}
                   className="flex items-center gap-2 "
                 >
                   {index + 1}.
-                  <li className="flex items-center justify-center bg-greenSecondary rounded px-4 py-2 text-grayPrimary">
+                  <li className="flex items-center justify-center rounded px-4 py-2">
                     {song.song} by {song.artist}
                   </li>
                 </div>
@@ -84,17 +84,15 @@ export default function Dashboard() {
 
       <div className="flex flex-col items-center justify-center gap-4">
         <h1 className="text-2xl">Saved lists</h1>
-        <ul className="flex flex-col items-center justify-start gap-4 p-4 overflow-y-auto max-h-96 scrollbar-thin scrollbar-thumb-greenSecondary scrollbar-track-grayPrimary">
+        <ul className="flex flex-col items-center justify-start gap-4 p-4 overflow-y-auto max-h-96 scrollbar-thin scrollbar-thumb-white scrollbar-track-white">
           {formattedData.map((item) => (
             <li key={item.id}>
               <button
                 type="button"
                 onClick={() => handleSelectList(item.id)}
                 className={`${
-                  item.id === selectedList?.id
-                    ? "bg-greenSecondary"
-                    : "bg-greenPrimary"
-                } text-grayPrimary rounded-full px-8 py-1 text-xl`}
+                  item.id === selectedList?.id ? "" : ""
+                } rounded-full px-8 py-1 text-xl`}
               >
                 {item.name}
               </button>

@@ -4,8 +4,6 @@
 
 html,
 body {
-  @apply bg-grayPrimary;
-
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }

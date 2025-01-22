@@ -25,7 +25,7 @@ export default function FormInput({
         defaultValue={defaultValue}
         type={type}
         disabled={disabled}
-        className="bg-greenSecondary rounded h-10 p-2 text-center text-grayPrimary"
+        className="rounded h-10 p-2 text-center bg-customBabyBlue text-customGrayText"
       />
     </div>
   );

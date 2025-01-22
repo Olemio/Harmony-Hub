@@ -66,7 +66,7 @@ function SearchForm({ fetcher }: { fetcher: FetcherWithComponents<SongData> }) {
         <div className="col-span-2 flex justify-center">
           <button
             type="submit"
-            className="bg-greenPrimary text-grayPrimary rounded-full m-2 px-16 py-2 text-2xl font-bold"
+            className="bg-customPnk text-customDarkGray rounded-full m-2 px-16 py-2 text-2xl font-bold"
           >
             Search
           </button>
@@ -111,7 +111,7 @@ function Results({
               className="flex items-center justify-center gap-4"
             >
               {i + 1}.{" "}
-              <div className="flex items-center justify-center bg-greenSecondary rounded h-10 px-8 text-grayPrimary">
+              <div className="flex items-center justify-center rounded h-10 px-8">
                 {rec.song} by {rec.artist}
               </div>
             </li>
@@ -122,13 +122,13 @@ function Results({
           <button
             type="button"
             onClick={() => window.location.reload()}
-            className="bg-greenPrimary text-grayPrimary rounded-full m-2 px-16 py-2 text-2xl font-bold"
+            className="rounded-full m-2 px-16 py-2 text-2xl font-bold"
           >
             Search Again
           </button>
           <button
             type="submit"
-            className="bg-greenPrimary text-grayPrimary rounded-full m-2 px-16 py-2 text-2xl font-bold"
+            className="rounded-full m-2 px-16 py-2 text-2xl font-bold"
           >
             save
           </button>

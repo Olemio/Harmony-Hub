@@ -17,10 +17,12 @@ export default {
         ],
       },
       colors: {
-        greenSecondary: "#6D9368",
-        greenPrimary: "#50A744",
-        grayPrimary: "#262626",
-        whitePrimary: "#EEEEEE"
+        customWhite: "#EEEEEE",
+        customBabyBlue: "#6670E0",
+        customPink: "#9361DA",
+        customDarkGray: "#1B1B1B",
+        customGray: "#1F1F1F",
+        customGrayText: "#131313",
       },
     },
   },

@@ -7,7 +7,7 @@ export default function Header() {
   return (
     <>
       {" "}
-      <header className="py-8 px-16 text-greenPrimary">
+      <header className="py-8 px-16 text-customPink bg-customDarkGray">
         <div className="flex justify-between items-center">
           <h1 className="text-5xl">Harmony Hub</h1>
           <h2 className="text-3xl hover:underline">
