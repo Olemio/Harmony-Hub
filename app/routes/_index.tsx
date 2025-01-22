@@ -26,7 +26,7 @@ export default function Home() {
     window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${logoutUri}`;
   };
 
-  console.log(auth.isAuthenticated);
+  console.log(auth);
 
   return (
     <>

@@ -43,8 +43,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <AuthProvider {...cognitoAuthConfig}>
-        <body className="flex flex-col h-svh text-whitePrimary">
+      <body className="flex flex-col h-svh text-whitePrimary">
+        <AuthProvider {...cognitoAuthConfig}>
           <Header />
           <main className="flex-grow">
             <div className="flex flex-col items-center justify-center h-full gap-16">
@@ -54,8 +54,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
           <ScrollRestoration />
           <Scripts />
-        </body>
-      </AuthProvider>
+        </AuthProvider>
+      </body>
     </html>
   );
 }
