@@ -19,7 +19,7 @@ export default function Home() {
 
   return (
     <>
-      {state === "submitting" ? (
+      {state === "submitting" && !actionData ? (
         <h1 className="text-3xl">Searching...</h1>
       ) : actionData ? (
         <ResultsForm fetcher={fetcher} data={actionData as SongData} />
