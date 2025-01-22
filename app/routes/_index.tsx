@@ -3,6 +3,7 @@ import { FetcherWithComponents, useFetcher } from "@remix-run/react";
 import FormInput from "../components/forminput";
 import { SongData } from "../../types";
 import { v4 as uuidv4 } from "uuid";
+import { useAuth } from "react-oidc-context";
 
 export const meta: MetaFunction = () => {
   return [
@@ -12,20 +13,46 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Home() {
-  const fetcher = useFetcher<SongData>();
-  const state = fetcher.state;
-  const actionData = fetcher.data;
+  // const fetcher = useFetcher<SongData>();
+  // const state = fetcher.state;
+  // const actionData = fetcher.data;
+  const auth = useAuth();
+  const signOutRedirect = () => {
+    const clientId = "3frc1dvnve7u0cmrq8loluaraa";
+    const logoutUri = "<logout uri>";
+    const cognitoDomain =
+      "https://eu-central-1iohjpqlho.auth.eu-central-1.amazoncognito.com";
+    window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(
+      logoutUri
+    )}`;
+  };
+
+  if (auth.isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (auth.error) {
+    return <div>Encountering error... {auth.error.message}</div>;
+  }
+
+  if (auth.isAuthenticated) {
+    return (
+      <div>
+        <pre> Hello: {auth.user?.profile.email} </pre>
+        <pre> ID Token: {auth.user?.id_token} </pre>
+        <pre> Access Token: {auth.user?.access_token} </pre>
+        <pre> Refresh Token: {auth.user?.refresh_token} </pre>
+
+        <button onClick={() => auth.removeUser()}>Sign out</button>
+      </div>
+    );
+  }
 
   return (
-    <>
-      {state === "submitting" ? (
-        <h1 className="text-3xl">Searching...</h1>
-      ) : actionData ? (
-        <Results fetcher={fetcher} data={actionData as SongData} />
-      ) : (
-        <SearchForm fetcher={fetcher} />
-      )}
-    </>
+    <div>
+      <button onClick={() => auth.signinRedirect()}>Sign in</button>
+      <button onClick={() => signOutRedirect()}>Sign out</button>
+    </div>
   );
 }
 
