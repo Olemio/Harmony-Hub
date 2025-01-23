@@ -88,7 +88,7 @@ function SongList({ list }: { list: SongData | null }) {
         </ul>
       ) : (
         <p className="flex justify-center h-80 min-w-80 bg-customDarkGray px-16 py-16 text-customPink rounded">
-          Select a list.
+          No list selected. Please select a list.
         </p>
       )}
     </div>
@@ -109,7 +109,7 @@ function SavedList({
   return (
     <div className="flex flex-col items-center gap-10">
       <h1 className="text-3xl">Lists</h1>
-      {data ? (
+      {data[0] ? (
         <ul className="flex flex-col overflow-y-auto h-80 min-w-80 gap-6 scrollbar-thin scrollbar-thumb-customPink scrollbar-track-transparent">
           {data.map((item) => (
             <li
@@ -133,7 +133,9 @@ function SavedList({
           ))}
         </ul>
       ) : (
-        <p>No list selected. Please select a list.</p>
+        <p className="flex justify-center h-80 min-w-80 bg-customDarkGray px-16 py-16 text-customPink rounded">
+          No saved lists. Search and save a list.
+        </p>
       )}
     </div>
   );
