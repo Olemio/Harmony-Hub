@@ -79,7 +79,7 @@ function SongList({ list }: { list: SongData | null }) {
       <h1 className="text-3xl">Songs</h1>
 
       {list ? (
-        <ul className="flex flex-col overflow-y-auto h-80 min-w-80 bg-customDarkGray rounded px-16 py-16 text-customPink text-center gap-2 scrollbar-thin scrollbar-thumb-customPink scrollbar-track-transparent">
+        <ul className="flex flex-col overflow-y-auto h-80 min-w-80 bg-customDarkGray rounded px-16 py-16 text-customBabyBlue text-center gap-2 scrollbar-thin scrollbar-thumb-customPink scrollbar-track-transparent">
           {list.songList.map((item, i) => (
             <li key={item.song + i} className="">
               {item.song} - {item.artist}
@@ -87,7 +87,7 @@ function SongList({ list }: { list: SongData | null }) {
           ))}
         </ul>
       ) : (
-        <p className="flex justify-center h-80 min-w-80 bg-customDarkGray px-16 py-16 text-customPink rounded">
+        <p className="flex justify-center h-80 min-w-80 bg-customDarkGray px-16 py-16 text-customBabyBlue rounded">
           No list selected. Please select a list.
         </p>
       )}

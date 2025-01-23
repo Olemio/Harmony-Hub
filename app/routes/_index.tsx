@@ -84,7 +84,7 @@ function ResultsForm({
         className="w-96"
       />
 
-      <ul className="flex flex-col gap-4 py-8 px-20 min-w-96 rounded bg-customDarkGray text-customPink">
+      <ul className="flex flex-col gap-4 py-8 px-20 min-w-96 rounded bg-customDarkGray text-customBabyBlue">
         {data.songList.map((item, i) => (
           <li key={i} className="text-center">
             {item.song} - {item.artist}
