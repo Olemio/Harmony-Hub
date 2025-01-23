@@ -1,7 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
-import { FetcherWithComponents, useFetcher } from "@remix-run/react";
+import { FetcherWithComponents, Link, useFetcher } from "@remix-run/react";
 import { SongData } from "../../types";
-import { v4 as uuidv4 } from "uuid";
 import Button from "~/components/button";
 import FormInput from "../components/forminput";
 
@@ -13,26 +12,26 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Home() {
-  const fetcher = useFetcher<SongData>();
+  const fetcher = useFetcher<SongData | string>();
   const actionData = fetcher.data;
   const action = fetcher.formAction;
 
-  console.log("__fetcher-action__", action, "__fetcher-data__", actionData);
+  console.log(actionData);
 
-  return (
-    <>
-      {action === "/api/getSongs" ? (
-        <h1 className="text-3xl">Searching...</h1>
-      ) : actionData ? (
-        <ResultsForm fetcher={fetcher} data={actionData} />
-      ) : (
-        <SearchForm fetcher={fetcher} />
-      )}
-    </>
+  return action === "/api/getSongs" ? (
+    <h1 className="text-3xl">Searching...</h1>
+  ) : actionData ? (
+    <ResultsForm fetcher={fetcher} data={actionData} />
+  ) : (
+    <SearchForm fetcher={fetcher} />
   );
 }
 
-function SearchForm({ fetcher }: { fetcher: FetcherWithComponents<SongData> }) {
+function SearchForm({
+  fetcher,
+}: {
+  fetcher: FetcherWithComponents<SongData | string>;
+}) {
   return (
     <fetcher.Form
       method="POST"
@@ -64,10 +63,10 @@ function ResultsForm({
   fetcher,
   data,
 }: {
-  fetcher: FetcherWithComponents<SongData>;
-  data: SongData;
+  fetcher: FetcherWithComponents<SongData | string>;
+  data: SongData | string;
 }) {
-  return (
+  return typeof data !== "string" && data.songList ? (
     <fetcher.Form
       method="POST"
       action="/api/saveSongs"
@@ -75,7 +74,7 @@ function ResultsForm({
     >
       <h1 className="text-3xl">Result</h1>
 
-      <input type="hidden" name="id" defaultValue={uuidv4()} />
+      <input type="hidden" name="id" defaultValue={data.id} />
       <input
         name="songList"
         type="hidden"
@@ -102,5 +101,16 @@ function ResultsForm({
         <Button type="submit">Save</Button>
       </div>
     </fetcher.Form>
+  ) : (
+    <div className="flex flex-col items-center gap-10">
+      <h1 className="text-3xl">{typeof data === "string" && data}</h1>
+
+      <div className="flex gap-10">
+        <Button onClick={() => window.location.reload()}>Home</Button>
+        <Button>
+          <Link to="/dashboard">Saved lists</Link>
+        </Button>
+      </div>
+    </div>
   );
 }

@@ -38,7 +38,7 @@ export const action: ActionFunction = async ({ request }) => {
       return new Response("Failed to save data", { status: 500 });
     }
 
-    return new Response("Data saved successfully", { status: 200 });
+    return "Saved";
   } catch (error) {
     console.error("Error:", error);
     return new Response("An error occurred while processing the data", {

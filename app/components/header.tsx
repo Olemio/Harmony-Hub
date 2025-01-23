@@ -19,7 +19,7 @@ export default function Header() {
         </Button>
 
         <Link to={pathname !== "/" ? "/" : "/dashboard"}>
-          <Button>{pathname === "/" ? "Saved lists" : "Go back"}</Button>
+          <Button>{pathname === "/" ? "Saved lists" : "Home"}</Button>
         </Link>
       </div>
     </header>
