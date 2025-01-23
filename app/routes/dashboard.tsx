@@ -125,7 +125,7 @@ function SavedList({
               </Button>
               <fetcher.Form method="DELETE" action="/api/deleteSong">
                 <input type="hidden" name="id" value={item.id} />
-                <button type="submit" className="text-red-500 text-2xl">
+                <button type="submit" className="text-red-400 text-2xl">
                   X
                 </button>
               </fetcher.Form>
