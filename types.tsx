@@ -23,6 +23,7 @@ export type ButtonProps = {
   type?: "button" | "submit";
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   className?: string;
+  disabled?: boolean;
 };
 
 export type FormInputPorps = {
