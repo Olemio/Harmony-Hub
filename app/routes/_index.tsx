@@ -79,12 +79,10 @@ function ResultsForm({
         defaultValue={JSON.stringify(data.songList)}
       />
 
-      <h1 className="text-3xl">Result</h1>
-
       <FormInput
         name="name"
         defaultValue={data.name}
-        label="Name"
+        label="List name"
         className="w-96"
       />
 
