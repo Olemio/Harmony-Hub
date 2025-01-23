@@ -9,7 +9,13 @@ export default function Header() {
 
   return (
     <header className="flex justify-between items-center py-8 px-16 text-customPink bg-customDarkGray">
-      <h1 className="text-3xl">Harmony Hub</h1>
+      <div className="flex items-center gap-6">
+        <h1 className="text-2xl">Harmony Hub</h1>
+        <p className="text-customWhite">-</p>
+        <h1 className=" text-customBabyBlue text-3xl">
+          {pathname === "/" ? "Home" : "Saved lists"}
+        </h1>
+      </div>
       <div className="flex">
         <Button
           className="text-customPink bg-transparent px-0 py-0 text-2xl"
