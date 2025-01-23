@@ -53,7 +53,9 @@ export default function Dashboard() {
         new Date(a.createdAt as Date).getTime()
     );
 
-  const [selectedList, setSelectedList] = React.useState<SongData | null>(null);
+  const [selectedList, setSelectedList] = React.useState<SongData | null>(
+    formattedData[0] ?? null
+  );
 
   function handleSelectList(id: string) {
     const list = formattedData.find((item) => item.id === id);
