@@ -16,8 +16,6 @@ export default function Home() {
   const actionData = fetcher.data;
   const action = fetcher.formAction;
 
-  console.log(actionData);
-
   return action === "/api/getSongs" ? (
     <h1 className="text-3xl">Searching...</h1>
   ) : actionData ? (
