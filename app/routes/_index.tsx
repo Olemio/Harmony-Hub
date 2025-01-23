@@ -38,7 +38,7 @@ function SearchForm({
       action="/api/getSongs"
       className="flex flex-col items-center gap-20 text-xl"
     >
-      <h1 className="text-3xl">Personalize your search</h1>
+      <h1 className="text-3xl">Personalize your song list</h1>
 
       <div className="grid grid-cols-2 gap-10">
         <FormInput name="genre" label="Genre" defaultValue="Pop" />
