@@ -114,7 +114,7 @@ function SavedList({
           {data.map((item) => (
             <li
               key={item.id}
-              className="flex gap-2 items-center justify-center"
+              className="flex gap-2 px-4 items-center justify-center"
             >
               <Button
                 type="button"
