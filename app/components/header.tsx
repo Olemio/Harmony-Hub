@@ -1,13 +1,25 @@
 import { Link, useLocation } from "@remix-run/react";
 import { useAuth } from "react-oidc-context";
 import Button from "./button";
+import React from "react";
 
 export default function Header() {
   const { pathname } = useLocation();
-  const auth = useAuth();
-  const isSignedIn = auth.isAuthenticated;
+  const {
+    isAuthenticated,
+    isLoading,
+    signinSilent,
+    signinRedirect,
+    signoutSilent,
+  } = useAuth();
 
-  console.log(auth);
+  React.useEffect(() => {
+    if (!isAuthenticated && !isLoading) {
+      signinSilent().catch((err) => {
+        console.error("Silent signin failed", err);
+      });
+    }
+  }, [isAuthenticated, isLoading, signinSilent]);
 
   return (
     <header className="flex justify-between items-center py-8 px-16 text-customPink bg-customDarkGray">
@@ -20,11 +32,9 @@ export default function Header() {
       <div className="flex">
         <Button
           className="text-customPink bg-transparent px-0 py-0 text-2xl"
-          onClick={() =>
-            isSignedIn ? auth.signoutSilent() : auth.signinRedirect()
-          }
+          onClick={() => (isAuthenticated ? signoutSilent() : signinRedirect())}
         >
-          {!isSignedIn ? "Sign in" : "Sign out"}
+          {!isAuthenticated ? "Sign in" : "Sign out"}
         </Button>
 
         <Link to={pathname !== "/" ? "/" : "/dashboard"}>

@@ -19,6 +19,8 @@ const cognitoAuthConfig = {
   redirect_uri: "http://localhost:5173",
   response_type: "code",
   scope: "email openid phone",
+  automaticSilentRenew: true,
+  silent_redirect_uri: "http://localhost:5173",
 };
 
 export const links: LinksFunction = () => [
