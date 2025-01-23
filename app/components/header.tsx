@@ -18,7 +18,9 @@ export default function Header() {
       <div className="flex">
         <Button
           className="text-customPink bg-transparent px-0 py-0 text-2xl"
-          onClick={() => (isSignedIn ? signOutRedirect : auth.signinRedirect())}
+          onClick={() =>
+            isSignedIn ? signOutRedirect() : auth.signinRedirect()
+          }
         >
           {!isSignedIn ? "Sign in" : "Sign out"}
         </Button>
