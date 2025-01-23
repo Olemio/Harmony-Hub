@@ -1,4 +1,5 @@
 import { ActionFunction } from "@remix-run/node";
+import { v4 as uuidv4 } from "uuid";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
@@ -28,10 +29,12 @@ export const action: ActionFunction = async ({ request }) => {
       throw new Error(`Failed to fetch data: ${response.statusText}`);
     }
 
-    const name = `${genre}, ${tempo}, ${theme}, ${num_songs}`;
     const data = await response.json();
+    const id = uuidv4();
+    const name = `${genre}, ${tempo}, ${theme}, ${num_songs}`;
+    const createdAt = new Date();
 
-    return { name, ...data };
+    return { id, name, songList: data.recommendations, createdAt };
   } catch (error) {
     console.error("Error fetching data: ", error);
     return { error: error };

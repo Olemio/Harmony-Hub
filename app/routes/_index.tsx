@@ -14,15 +14,17 @@ export const meta: MetaFunction = () => {
 
 export default function Home() {
   const fetcher = useFetcher<SongData>();
-  const state = fetcher.state;
   const actionData = fetcher.data;
+  const action = fetcher.formAction;
+
+  console.log("__fetcher-action__", action, "__fetcher-data__", actionData);
 
   return (
     <>
-      {state === "submitting" && !actionData ? (
+      {action === "/api/getSongs" ? (
         <h1 className="text-3xl">Searching...</h1>
       ) : actionData ? (
-        <ResultsForm fetcher={fetcher} data={actionData as SongData} />
+        <ResultsForm fetcher={fetcher} data={actionData} />
       ) : (
         <SearchForm fetcher={fetcher} />
       )}
@@ -65,7 +67,6 @@ function ResultsForm({
   fetcher: FetcherWithComponents<SongData>;
   data: SongData;
 }) {
-  console.log(data);
   return (
     <fetcher.Form
       method="POST"
@@ -78,7 +79,7 @@ function ResultsForm({
       <input
         name="songList"
         type="hidden"
-        defaultValue={JSON.stringify(data.recommendations)}
+        defaultValue={JSON.stringify(data.songList)}
       />
 
       <FormInput
@@ -89,8 +90,8 @@ function ResultsForm({
       />
 
       <ul className="flex flex-col gap-4 py-8 px-20 min-w-96 rounded bg-customDarkGray text-customPink">
-        {data.recommendations.map((item) => (
-          <li key={item.song} className="text-center">
+        {data.songList.map((item, i) => (
+          <li key={i} className="text-center">
             {item.song} - {item.artist}
           </li>
         ))}
