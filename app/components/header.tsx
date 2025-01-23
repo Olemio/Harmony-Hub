@@ -7,6 +7,8 @@ export default function Header() {
   const auth = useAuth();
   const isSignedIn = auth.isAuthenticated;
 
+  console.log(auth);
+
   return (
     <header className="flex justify-between items-center py-8 px-16 text-customPink bg-customDarkGray">
       <div className="flex items-center gap-12">
@@ -19,7 +21,7 @@ export default function Header() {
         <Button
           className="text-customPink bg-transparent px-0 py-0 text-2xl"
           onClick={() =>
-            isSignedIn ? signOutRedirect() : auth.signinRedirect()
+            isSignedIn ? auth.signoutSilent() : auth.signinRedirect()
           }
         >
           {!isSignedIn ? "Sign in" : "Sign out"}
@@ -32,11 +34,3 @@ export default function Header() {
     </header>
   );
 }
-
-const signOutRedirect = () => {
-  const clientId = "3frc1dvnve7u0cmrq8loluaraa";
-  const logoutUri = "http://localhost:5173";
-  const cognitoDomain =
-    "https://eu-central-1iohjpqlho.auth.eu-central-1.amazoncognito.com";
-  window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${logoutUri}`;
-};
