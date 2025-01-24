@@ -12,16 +12,19 @@ import { getSession } from "~/sessions.server";
 export const loader: LoaderFunction = async ({ request }) => {
   const session = await getSession(request.headers.get("Cookie"));
   const idToken = session.get("idToken") as string | undefined;
+  const userId = session.get("userId") as string | undefined;
 
-  if (!idToken) {
+  if (!idToken || !userId) {
     return [];
   }
 
-  const url =
-    "https://8tp0caiqc0.execute-api.eu-central-1.amazonaws.com/dev-harmony-hub/items";
+  const url = new URL(
+    "https://8tp0caiqc0.execute-api.eu-central-1.amazonaws.com/dev-harmony-hub/items"
+  );
+  url.searchParams.append("userId", userId);
 
   try {
-    const response = await fetch(url, {
+    const response = await fetch(url.toString(), {
       method: "GET",
       headers: {
         Authorization: idToken,

@@ -18,8 +18,11 @@ export default function Header() {
 
   React.useEffect(() => {
     if (auth.isAuthenticated && auth.user?.id_token) {
+      const idToken = auth.user.id_token;
+      const userId = auth.user.profile.email || "unknown";
       const formData = new FormData();
-      formData.append("idToken", auth.user?.id_token);
+      formData.append("idToken", idToken);
+      formData.append("userId", userId);
 
       fetch("/auth/store-token", {
         method: "POST",

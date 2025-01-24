@@ -4,6 +4,7 @@ import { getSession } from "~/sessions.server";
 export const action: ActionFunction = async ({ request }) => {
   const session = await getSession(request.headers.get("Cookie"));
   const idToken = session.get("idToken") as string | undefined;
+  const userId = session.get("userId") as string | undefined;
 
   if (!idToken) {
     return new Response("Not logged in", { status: 400 });
@@ -13,7 +14,6 @@ export const action: ActionFunction = async ({ request }) => {
   const songList = formData.get("songList");
   const name = formData.get("name");
   const id = formData.get("id");
-  const userId = "ailurus842@gmail.com";
   const createdAt = new Date();
 
   if (!id || !name || !songList || !userId || !createdAt) {
