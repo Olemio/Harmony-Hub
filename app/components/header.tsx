@@ -33,7 +33,7 @@ export default function Header() {
       try {
         await fetch("/auth/clear-token", { method: "POST" });
         await auth.signoutSilent();
-        navigate("/");
+        pathname === "/dashboard" && navigate("/");
       } catch (err) {
         console.error("Sign out failed:", err);
       }
