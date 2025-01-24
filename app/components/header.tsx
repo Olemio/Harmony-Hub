@@ -1,10 +1,11 @@
 import React from "react";
-import { Link, useLocation } from "@remix-run/react";
+import { Link, useLocation, useNavigate } from "@remix-run/react";
 import { useAuth } from "react-oidc-context";
 import Button from "./button";
 
 export default function Header() {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const auth = useAuth();
 
   React.useEffect(() => {
@@ -32,6 +33,7 @@ export default function Header() {
       try {
         await fetch("/auth/clear-token", { method: "POST" });
         await auth.signoutSilent();
+        navigate("/");
       } catch (err) {
         console.error("Sign out failed:", err);
       }
