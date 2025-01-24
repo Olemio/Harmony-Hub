@@ -7,14 +7,27 @@ import {
 import { Item, SongData } from "../../types";
 import React from "react";
 import Button from "~/components/button";
+import { getSession } from "~/sessions.server";
 
-export const loader: LoaderFunction = async () => {
+export const loader: LoaderFunction = async ({ request }) => {
+  const session = await getSession(request.headers.get("Cookie"));
+  const idToken = session.get("idToken") as string | undefined;
+
+  console.log("__idToken__", idToken);
+
+  if (!idToken) {
+    return [];
+  }
+
   const url =
     "https://8tp0caiqc0.execute-api.eu-central-1.amazonaws.com/dev-harmony-hub/items";
 
   try {
     const response = await fetch(url, {
       method: "GET",
+      headers: {
+        Authorization: idToken,
+      },
     });
 
     if (!response.ok) {
@@ -29,10 +42,10 @@ export const loader: LoaderFunction = async () => {
   } catch (error) {
     console.error("Error fetching items:", error);
 
-    return new Response(
-      JSON.stringify({ error: "Unable to fetch items from the database" }),
-      { status: 500, headers: { "Content-Type": "application/json" } }
-    );
+    return new Response(JSON.stringify([]), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 };
 
