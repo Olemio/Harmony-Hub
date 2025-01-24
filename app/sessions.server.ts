@@ -6,7 +6,7 @@ export const { getSession, commitSession, destroySession } =
       name: "__session",
       httpOnly: true,
       path: "/",
-      sameSite: "lax",
+      sameSite: "none",
       secrets: ["YOUR_SECRET"],
       secure: true,
     },

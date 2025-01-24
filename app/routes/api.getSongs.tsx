@@ -1,14 +1,22 @@
 import { ActionFunction } from "@remix-run/node";
 import { v4 as uuidv4 } from "uuid";
+import { getSession } from "~/sessions.server";
 
 export const action: ActionFunction = async ({ request }) => {
+  const session = await getSession(request.headers.get("Cookie"));
+  const idToken = session.get("idToken");
+
+  if (!idToken) {
+    return new Response("Log in to search");
+  }
+
   const formData = await request.formData();
   const genre = formData.get("genre");
   const tempo = formData.get("tempo");
   const theme = formData.get("theme");
   const num_songs = formData.get("songAmount");
   const claudeUrl =
-    "https://sermgkrheom6gele4rqbui5mlq0ffvan.lambda-url.eu-central-1.on.aws";
+    "https://8tp0caiqc0.execute-api.eu-central-1.amazonaws.com/dev-harmony-hub/claude";
 
   const params = { genre, tempo, theme, num_songs };
 
@@ -23,6 +31,9 @@ export const action: ActionFunction = async ({ request }) => {
 
     const response = await fetch(url.toString(), {
       method: "GET",
+      headers: {
+        Authorization: idToken,
+      },
     });
 
     if (!response.ok) {
