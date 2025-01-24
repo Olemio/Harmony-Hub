@@ -22,7 +22,6 @@ export default {
         customPink: "#9361DA",
         customDarkGray: "#1B1B1B",
         customGray: "#1F1F1F",
-        customGrayText: "#131313",
       },
     },
   },

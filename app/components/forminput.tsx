@@ -19,7 +19,7 @@ export default function FormInput({
         type={type}
         disabled={disabled}
         className={clsx(
-          "rounded py-1 w-48 text-center bg-customBabyBlue text-customGrayText",
+          "rounded py-1 w-48 text-center bg-customBabyBlue text-customGray",
           className
         )}
       />
