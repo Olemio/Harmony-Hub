@@ -6,10 +6,8 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
-
 import "./tailwind.css";
 import Header from "./components/header";
-
 import { AuthProvider } from "react-oidc-context";
 
 const cognitoAuthConfig = {
