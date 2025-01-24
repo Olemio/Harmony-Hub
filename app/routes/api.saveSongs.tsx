@@ -22,7 +22,7 @@ export const action: ActionFunction = async ({ request }) => {
     };
 
     const response = await fetch(
-      "https://eau8opmlk7.execute-api.eu-central-1.amazonaws.com/items",
+      "https://8tp0caiqc0.execute-api.eu-central-1.amazonaws.com/dev-harmony-hub/items",
       {
         method: "PUT",
         headers: {

@@ -10,12 +10,13 @@ export const action: ActionFunction = async ({ request }) => {
 
   try {
     const response = await fetch(
-      `https://eau8opmlk7.execute-api.eu-central-1.amazonaws.com/items/${id}`,
+      `https://8tp0caiqc0.execute-api.eu-central-1.amazonaws.com/dev-harmony-hub/item`,
       {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
+        body: JSON.stringify({ id }),
       }
     );
     if (!response.ok) {

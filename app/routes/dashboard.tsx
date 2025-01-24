@@ -9,7 +9,8 @@ import React from "react";
 import Button from "~/components/button";
 
 export const loader: LoaderFunction = async () => {
-  const url = "https://eau8opmlk7.execute-api.eu-central-1.amazonaws.com/items";
+  const url =
+    "https://8tp0caiqc0.execute-api.eu-central-1.amazonaws.com/dev-harmony-hub/items";
 
   try {
     const response = await fetch(url, {
@@ -21,7 +22,6 @@ export const loader: LoaderFunction = async () => {
     }
 
     const data: Item[] = await response.json();
-
     return new Response(JSON.stringify(data), {
       status: 200,
       headers: { "Content-Type": "application/json" },
