@@ -1,10 +1,14 @@
 import { ActionFunction } from "@remix-run/node";
+import { getSession } from "~/sessions.server";
 
 export const action: ActionFunction = async ({ request }) => {
+  const session = await getSession(request.headers.get("Cookie"));
+  const idToken = session.get("idToken") as string | undefined;
+
   const formData = await request.formData();
   const id = formData.get("id");
 
-  if (!id) {
+  if (!id || !idToken) {
     return new Response("No id was found", { status: 400 });
   }
 
@@ -14,6 +18,7 @@ export const action: ActionFunction = async ({ request }) => {
       {
         method: "DELETE",
         headers: {
+          Authorization: idToken,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ id }),

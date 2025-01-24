@@ -1,6 +1,14 @@
 import { ActionFunction } from "@remix-run/node";
+import { getSession } from "~/sessions.server";
 
 export const action: ActionFunction = async ({ request }) => {
+  const session = await getSession(request.headers.get("Cookie"));
+  const idToken = session.get("idToken") as string | undefined;
+
+  if (!idToken) {
+    return new Response("Not logged in", { status: 400 });
+  }
+
   const formData = await request.formData();
   const songList = formData.get("songList");
   const name = formData.get("name");
@@ -26,6 +34,7 @@ export const action: ActionFunction = async ({ request }) => {
       {
         method: "PUT",
         headers: {
+          Authorization: idToken,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formattedData),
