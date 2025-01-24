@@ -13,8 +13,6 @@ export const loader: LoaderFunction = async ({ request }) => {
   const session = await getSession(request.headers.get("Cookie"));
   const idToken = session.get("idToken") as string | undefined;
 
-  console.log("__idToken__", idToken);
-
   if (!idToken) {
     return [];
   }

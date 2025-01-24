@@ -5,10 +5,14 @@ export const action: ActionFunction = async ({ request }) => {
   const session = await getSession(request.headers.get("Cookie"));
   const idToken = session.get("idToken") as string | undefined;
 
+  if (!idToken) {
+    return new Response("No token was found", { status: 400 });
+  }
+
   const formData = await request.formData();
   const id = formData.get("id");
 
-  if (!id || !idToken) {
+  if (!id) {
     return new Response("No id was found", { status: 400 });
   }
 
