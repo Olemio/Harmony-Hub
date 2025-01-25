@@ -8,10 +8,13 @@ export default function FormInput({
   disabled = false,
   type = "text",
   className,
+  labelClassName,
 }: FormInputPorps) {
   return (
-    <div className="flex flex-col items-center gap-2">
-      <label htmlFor={name}>{label}</label>
+    <div className="flex flex-col items-center gap-1">
+      <label className={labelClassName} htmlFor={name}>
+        {label}
+      </label>
       <input
         name={name}
         id={name}

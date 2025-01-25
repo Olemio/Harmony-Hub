@@ -23,7 +23,7 @@ export type ButtonProps = {
   type?: "button" | "submit";
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   className?: string;
-  disabled?: boolean;
+  dark?: boolean;
 };
 
 export type FormInputPorps = {
@@ -33,4 +33,5 @@ export type FormInputPorps = {
   disabled?: boolean;
   type?: string;
   className?: string;
+  labelClassName?: string;
 };

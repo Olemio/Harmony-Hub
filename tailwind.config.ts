@@ -18,8 +18,8 @@ export default {
       },
       colors: {
         customWhite: "#EEEEEE",
-        customBabyBlue: "#6670E0",
-        customPink: "#9361DA",
+        customBabyBlue: "#3CB7E3",
+        customPink: "#B37DFF",
         customDarkGray: "#1B1B1B",
         customGray: "#1F1F1F",
       },

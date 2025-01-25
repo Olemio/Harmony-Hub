@@ -77,7 +77,7 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="grid grid-cols-2 gap-10 mt-4">
+    <div className="flex justify-evenly items-center w-full h-full">
       <SongList list={selectedList} />
       <SavedList
         fetcher={fetcher}
@@ -91,19 +91,21 @@ export default function Dashboard() {
 
 function SongList({ list }: { list: SongData | null }) {
   return (
-    <div className="flex flex-col items-center gap-10">
-      <h1 className="text-3xl">Songs</h1>
+    <div className="flex flex-col items-center gap-10 w-1/3 h-1/2">
+      <h1 className="text-4xl">Songs</h1>
 
       {list ? (
-        <ul className="flex flex-col overflow-y-auto h-80 min-w-80 bg-customDarkGray rounded px-16 py-16 text-customBabyBlue text-center gap-2 scrollbar-thin scrollbar-thumb-customPink scrollbar-track-transparent">
-          {list.songList.map((item, i) => (
-            <li key={item.song + i} className="">
-              {item.song} - {item.artist}
-            </li>
-          ))}
-        </ul>
+        <div className="w-full h-full rounded border border-black bg-customDarkGray text-2xl  overflow-y-auto scrollbar-thin scrollbar-thumb-customBabyBlue scrollbar-track-transparent">
+          <ul className="flex flex-col items-center gap-4 text-customBabyBlue text-center my-4">
+            {list.songList.map((item, i) => (
+              <li key={item.song + i} className="p-2">
+                {item.song} - {item.artist}
+              </li>
+            ))}
+          </ul>
+        </div>
       ) : (
-        <p className="flex justify-center h-80 min-w-80 bg-customDarkGray px-16 py-16 text-customBabyBlue rounded">
+        <p className="flex justify-center h-80 bg-customDarkGray px-16 py-16 text-customBabyBlue rounded">
           No list selected. Please select a list.
         </p>
       )}
@@ -123,31 +125,31 @@ function SavedList({
   id?: string;
 }) {
   return (
-    <div className="flex flex-col items-center gap-10">
-      <h1 className="text-3xl">Lists</h1>
+    <div className="flex flex-col items-center gap-10 w-1/3 h-1/2">
+      <h1 className="text-4xl">Lists</h1>
       {data[0] ? (
-        <ul className="flex flex-col overflow-y-auto h-80 min-w-80 gap-6 scrollbar-thin scrollbar-thumb-customPink scrollbar-track-transparent">
-          {data.map((item) => (
-            <li
-              key={item.id}
-              className="flex gap-2 px-4 items-center justify-center"
-            >
-              <Button
-                type="button"
-                onClick={() => handleSelectList(item.id)}
-                disabled={item.id === id}
-              >
-                {item.name}
-              </Button>
-              <fetcher.Form method="DELETE" action="/api/deleteSong">
-                <input type="hidden" name="id" value={item.id} />
-                <button type="submit" className="text-red-400 text-2xl">
-                  X
-                </button>
-              </fetcher.Form>
-            </li>
-          ))}
-        </ul>
+        <div className="w-full h-full rounded border border-black bg-customDarkGray text-2xl  overflow-y-auto scrollbar-thin scrollbar-thumb-customPink scrollbar-track-transparent">
+          <ul className="flex flex-col items-center gap-6 my-4">
+            {data.map((item) => (
+              <li key={item.id} className="flex items-center w-2/3 gap-4">
+                <Button
+                  type="button"
+                  onClick={() => handleSelectList(item.id)}
+                  dark={item.id === id}
+                  className="w-full p-2 truncate"
+                >
+                  {item.name}
+                </Button>
+                <fetcher.Form method="DELETE" action="/api/deleteSong">
+                  <input type="hidden" name="id" value={item.id} />
+                  <button type="submit" className="text-red-400 text-2xl">
+                    X
+                  </button>
+                </fetcher.Form>
+              </li>
+            ))}
+          </ul>
+        </div>
       ) : (
         <p className="flex justify-center h-80 min-w-80 bg-customDarkGray px-16 py-16 text-customPink rounded">
           No saved lists. Search and save a list.

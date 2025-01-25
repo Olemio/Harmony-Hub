@@ -46,23 +46,24 @@ export default function Header() {
   };
 
   return (
-    <header className="flex justify-between items-center py-8 px-16 text-customPink bg-customDarkGray">
+    <header className="flex justify-between items-center h-20 px-16 text-customPink bg-customDarkGray border-b border-black">
       <div className="flex items-center gap-12">
-        <h1 className="text-2xl">Harmony Hub</h1>
-        <h1 className=" text-customBabyBlue text-3xl">
-          {pathname === "/" ? "Home" : "Saved lists"}
-        </h1>
+        <Link to="/">
+          <h1 className="text-2xl">Harmony Hub</h1>
+        </Link>
       </div>
-      <div className="flex">
+      <div className="flex gap-8">
         <Button
-          className="text-customPink bg-transparent px-0 py-0 text-2xl"
+          className="text-customPink bg-transparent"
           onClick={handleSignOut}
         >
           {!auth.isAuthenticated ? "Sign in" : "Sign out"}
         </Button>
 
         <Link to={pathname !== "/" ? "/" : "/dashboard"}>
-          <Button>{pathname === "/" ? "Saved lists" : "Home"}</Button>
+          <Button className="text-lg px-4 py-1">
+            {pathname === "/" ? "Saved lists" : "Home"}
+          </Button>
         </Link>
       </div>
     </header>

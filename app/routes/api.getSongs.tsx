@@ -7,7 +7,7 @@ export const action: ActionFunction = async ({ request }) => {
   const idToken = session.get("idToken");
 
   if (!idToken) {
-    return new Response("Log in to search");
+    return new Response("Sign in to search");
   }
 
   const formData = await request.formData();
