@@ -42,7 +42,7 @@ export const action: ActionFunction = async ({ request }) => {
 
     const data = await response.json();
     const id = uuidv4();
-    const name = `${genre}, ${tempo}, ${theme}, ${num_songs}`;
+    const name = `${genre} - ${tempo} - ${theme} - ${num_songs}`;
 
     return { id, name, songList: data.recommendations };
   } catch (error) {

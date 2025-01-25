@@ -84,7 +84,6 @@ function ResultsForm({
             defaultValue={data.name}
             label="Name"
             className="w-80 py-2 truncate"
-            labelClassName=""
           />
 
           <ul className="flex flex-col items-center gap-4 text-customBabyBlue text-center my-4">
